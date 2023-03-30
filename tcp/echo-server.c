@@ -44,18 +44,19 @@ int main(int argc, char *argv[]) {
     // in the buffer
     // 3. in general, there is no rule that for each client's write(), there
     // will be a corresponding read()
-    size_t read_length;
+    size_t read_length, total = 0;
     do {
       int flags = 0;
       read_length = receive_message(client_fd, buffer, BUFFER_SIZE, flags);
+      total += read_length;
       if (read_length > 0) {
-        printf("Received %zd bytes from client %s:%u: '%.*s'\n", read_length,
-               client_ip, client_port, (int)read_length,
-               buffer); // note: we specify the length of the printed string
+        printf(
+            "Received %zd (%zd) bytes from client %s:%u\n", read_length, total, client_ip,
+            client_port); // note: we specify the length of the printed string
         sprintf(buffer, "%lu", read_length);
-        send_message(client_fd, buffer, read_length, flags);
         printf("Sent %zd bytes to client %s:%u\n", read_length, client_ip,
                client_port);
+        send_message(client_fd, buffer, total, flags);
       }
     } while (read_length > 0);
     printf("Closing connection\n");
