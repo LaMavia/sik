@@ -8,7 +8,7 @@
 #include "common.h"
 #include "err.h"
 
-#define BUFFER_SIZE 40
+#define BUFFER_SIZE 20000
 #define QUEUE_LENGTH 5
 
 int main(int argc, char *argv[]) {

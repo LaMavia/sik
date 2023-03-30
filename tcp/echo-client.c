@@ -7,7 +7,7 @@
 #include "common.h"
 #include "err.h"
 
-#define BUFFER_SIZE 20
+#define BUFFER_SIZE 20000
 
 char shared_buffer[BUFFER_SIZE];
 
