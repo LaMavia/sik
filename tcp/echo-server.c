@@ -46,12 +46,14 @@ int main(int argc, char *argv[]) {
     // will be a corresponding read()
     size_t read_length, total = 0;
     do {
+      memset(buffer, 0, BUFFER_SIZE);
       int flags = 0;
       read_length = receive_message(client_fd, buffer, BUFFER_SIZE, flags);
       total += read_length;
       if (read_length > 0) {
         printf(
-            "Received %zd (%zd) bytes from client %s:%u\n", read_length, total, client_ip,
+            "Received %zd (%zd) bytes from client %s:%u\n", read_length, total,
+            client_ip,
             client_port); // note: we specify the length of the printed string
         sprintf(buffer, "%lu", read_length);
         printf("Sent %zd bytes to client %s:%u\n", read_length, client_ip,

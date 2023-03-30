@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
   uint16_t port = read_port(argv[2]);
   long n = atol(argv[3]), k = atol(argv[4]);
   char *msg = malloc(sizeof(*msg) * k);
+  if (!msg) fatal("alloc failed");
   memset(msg, 'A', k);
   msg[k - 1] = '\0';
   struct sockaddr_in server_address = get_address(host, port);
